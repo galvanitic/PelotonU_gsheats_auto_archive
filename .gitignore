@@ -1,0 +1,6 @@
+# Python vitual environment
+.venv
+
+# Credentials
+credentials.json
+token.json
