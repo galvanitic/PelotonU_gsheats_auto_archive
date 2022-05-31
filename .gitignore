@@ -4,3 +4,5 @@
 # Credentials
 credentials.json
 token.json
+client_secret.json
+sheets.googleapis.com-python.json
