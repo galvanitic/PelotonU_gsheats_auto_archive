@@ -11,6 +11,7 @@ class HCNSheetsDriver:
     def __init__(self, main_sheet_id, archive_folder_id):
         # Authorize and create instance
         self.gc = pygsheets.authorize(client_secret='client_secret.json')
+        # self.gc = pygsheets.authorize(local=True)
         # Global Constants
         self.HCN_ONEGOAL_SHEET_ID = main_sheet_id
         self.ONEGOAL_ARCHIVE_FOLDER_ID = archive_folder_id
@@ -21,7 +22,8 @@ class HCNSheetsDriver:
         Creates a backup of the main sheet.
         :return: Void
         '''
-        email_recipients = ['rgalvan@pelotonu.org']
+        email_recipients = ['rgalvan@pelotonu.org', 'sarah@pelotonu.org', 'alma@pelotonu.org']
+        owners = ['sarah@pelotonu.org']
         time_of_backup = date.today().strftime("%m/%d/%Y")
         new_sheet_name = "Archive created: "+time_of_backup
         self.gc.drive.copy_file(self.HCN_ONEGOAL_SHEET_ID, new_sheet_name, self.ONEGOAL_ARCHIVE_FOLDER_ID);
@@ -67,38 +69,39 @@ def main():
         print("> Creating backup of main sheet...")
         hcn.createBackup()
         print("> Clearing the main sheet.")
-        # hcn.clearTemplate('1ER4WlZ9vMVOYW904DgCvThjr-3IedW4AGHJ9_cwIkvY')
+        hcn.clearTemplate(mainSheetID)
 
     # define the countdown func.
-    def countdownHelper(seconds, granularity=2):
-        intervals = (
-            ('weeks', 604800),  # 60 * 60 * 24 * 7
-            ('days', 86400),    # 60 * 60 * 24
-            ('hours', 3600),    # 60 * 60
-            ('minutes', 60),
-            ('seconds', 1),
-        )
-        result = []
+    # def countdownHelper(seconds, granularity=2):
+    #     intervals = (
+    #         ('weeks', 604800),  # 60 * 60 * 24 * 7
+    #         ('days', 86400),    # 60 * 60 * 24
+    #         ('hours', 3600),    # 60 * 60
+    #         ('minutes', 60),
+    #         ('seconds', 1),
+    #     )
+    #     result = []
 
-        for name, count in intervals:
-            value = seconds // count
-            if value:
-                seconds -= value * count
-                if value == 1:
-                    name = name.rstrip('s')
-                result.append("{} {}".format(value, name))
-        return ', '.join(result[:granularity])
+    #     for name, count in intervals:
+    #         value = seconds // count
+    #         if value:
+    #             seconds -= value * count
+    #             if value == 1:
+    #                 name = name.rstrip('s')
+    #             result.append("{} {}".format(value, name))
+    #     return ', '.join(result[:granularity])
 
-    def countdown(t):
-        print("Next archive will be made in: ")
-        while t:
-            print(countdownHelper(t, 5), end="\r")
-            time.sleep(1)
-            t -= 1
+    # def countdown(t):
+    #     print("Next archive will be made in: ")
+    #     while t:
+    #         print(countdownHelper(t, 5), end="\r")
+    #         time.sleep(1)
+    #         t -= 1
 
-    while (True): # Make this run indefinitely
-        countdown(5)
-        batch()
+    batch()
+    # while (True): # Make this run indefinitely
+    #     countdown(two_weeks)
+    #     batch()
 
 if __name__ == '__main__':
     main()
