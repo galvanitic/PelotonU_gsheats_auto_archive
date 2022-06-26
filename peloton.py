@@ -23,7 +23,6 @@ class HCNSheetsDriver:
         :return: Void
         '''
         email_recipients = ['rgalvan@pelotonu.org', 'sarah@pelotonu.org', 'alma@pelotonu.org']
-        owners = ['sarah@pelotonu.org']
         time_of_backup = date.today().strftime("%m/%d/%Y")
         new_sheet_name = "Archive created: "+time_of_backup
         self.gc.drive.copy_file(self.HCN_ONEGOAL_SHEET_ID, new_sheet_name, self.ONEGOAL_ARCHIVE_FOLDER_ID);
@@ -49,12 +48,12 @@ class HCNSheetsDriver:
         Dashboard.clear(start='C14', end='H18')
 
         # Clear 'Detailed Academic Data'
-        Detailed_Academic_Data = sheet_to_clear.worksheet(property='index', value=1)
-        Detailed_Academic_Data.clear(start='A2', end=None)
+        # Detailed_Academic_Data = sheet_to_clear.worksheet(property='index', value=1)
+        # Detailed_Academic_Data.clear(start='A2', end=None)
 
         # Clear 'Detailed Recruitment Data'
-        Detailed_Recruitment_Data = sheet_to_clear.worksheet(property='index', value=2)
-        Detailed_Recruitment_Data.clear(start='A2', end=None)
+        # Detailed_Recruitment_Data = sheet_to_clear.worksheet(property='index', value=2)
+        # Detailed_Recruitment_Data.clear(start='A2', end=None)
     
 
 def main():
